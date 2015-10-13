@@ -8,3 +8,8 @@ function getWindVelocity(coord){
   var wind = grids.primaryGrid.interpolate(λ, φ);
   return wind; //Format [vx, vy, |v|]
 }
+
+
+function coordToScreen(coord){
+	return globe.projection(coord);
+}

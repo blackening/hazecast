@@ -104,8 +104,9 @@
      * This object emits clean "moveStart" -> ("move")* -> "moveEnd" events for move operations, and "click" events
      * for normal clicks. Spurious moves emit no events.
      */
+	var globe = null;
     function buildInputController() {
-        var globe, op = null;
+        var op = null;
 
         /**
          * @returns {Object} an object to represent the state for one move operation.
