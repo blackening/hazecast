@@ -14,10 +14,12 @@ function coordToScreen(coord){
 	return globe.projection(coord);
 }
 
-var step_size = 0.1;
+var step_size = 0.1; //This is in degrees of lat/lon.
+var step_size_km = 11.132; //Source: wikipedia.
+var ms_to_kmh = 3.6; //Source: Primary school teacher.
 var bottomLeft = [95, -10];
 var topRight = [121 , 6];
-var delta_t = 0.005;
+var delta_t = 0.1; //Lets make this 6 mins. This is in hours.
 
 var HazeGrid = _.map(_.range(bottomLeft[0], topRight[0], step_size), function(x){
 	return _.map(_.range(bottomLeft[1], topRight[1], step_size), function(y){
@@ -50,8 +52,8 @@ function step(){
 			var bottom = HazeGrid[x][y-1];
 			
 			var self_approx = 0.25 * (left.m + right.m + top.m + bottom.m);
-			var grad_term_x = delta_t * wind[0] / (2 * step_size) * (right.m - left.m);
-			var grad_term_y = delta_t * wind[1] / (2 * step_size) * (top.m - bottom.m);
+			var grad_term_x = delta_t * wind[0] * ms_to_kmh / (2 * step_size_km) * (right.m - left.m);
+			var grad_term_y = delta_t * wind[1] * ms_to_kmh / (2 * step_size_km) * (top.m - bottom.m);
 			self.next_m = self_approx - grad_term_x - grad_term_y;
 			if(self.next_m < eps)
 				self.next_m = 0;
