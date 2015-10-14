@@ -1,3 +1,11 @@
+HazeCast
+-------------
+This is simply an advection simulation hacked onto Earth (in about 4 hours).
+To test it, open up your console and type run(n), where n is the number of timesteps.
+
+The implementation details are in public/libs/HazeCast/HazeCast.js.
+
+
 earth
 =====
 
